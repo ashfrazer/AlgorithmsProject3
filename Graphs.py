@@ -30,8 +30,35 @@ class Graph1:
     c) Provided that there is a path between two vertices u and v in the graph. If started
     from u, do DFS and BFS always find exactly the same path to v?
     """
+    def __init__(self): # Constructor
+        # Initialize graph
+        self.G = nx.Graph()
 
-    pass # Delete and replace with implementation
+        # Create nodes
+        nodes = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P']
+        self.G.add_nodes_from(nodes)
+
+        # Add edges
+        edges = [
+            ('A', 'B'), ('A', 'E'), ('A', 'F'), ('B', 'C'), ('B', 'F'),
+            ('C', 'D'), ('C', 'G'), ('D', 'G'), ('E', 'F'), ('E', 'I'),
+            ('F', 'I'), ('I', 'J'), ('I', 'M'), ('J', 'G'), ('M', 'N'),
+            ('H', 'K'), ('H', 'L'), ('K', 'L'), ('K', 'O'), ('L', 'P')
+        ]
+
+        self.G.add_edges_from(edges)
+
+    def displayGraph(self):
+        plt.figure(figsize=(10, 8))
+        pos = nx.spring_layout(self.G)
+
+        # Draw graph
+        nx.draw(
+            self.G, pos, with_labels=True, node_color='lightblue', edge_color='red',
+            node_size=1000, font_size=10, font_weight='bold', width=1.5
+        )
+
+        plt.show()
 
 class Graph2:
     """
@@ -64,6 +91,39 @@ class Graph3:
     pass # Delete and replace with implementation
 
 def main():
+    menu = {1 : 'Graph 1',
+            2 : 'Graph 2',
+            3 : 'Graph 3',
+            4 : 'Exit program'}
+
+    # Initialize graph objects
     graph1 = Graph1()
     graph2 = Graph2()
     graph3 = Graph3()
+
+    print('Welcome to our Graph Project!')
+    print(f'Which graph would you like to see?')
+
+    # Print menu options
+    for key, value in menu.items():
+        print(f'{key}: {value}')
+
+    # Prompt user for selection
+    while True:
+        selection = input('Enter your option (1-3): ')
+        if selection == '1':
+            graph1.displayGraph()
+            continue
+        elif selection == '2':
+            # graph2.displayGraph()
+            continue
+        elif selection == '3':
+            # graph3.displayGraph()
+            continue
+        elif selection == '4':
+            print('Goodbye!')
+            break
+        else:
+            print('Invalid option!')
+
+main()
