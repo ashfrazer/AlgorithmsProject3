@@ -1,3 +1,5 @@
+import collections
+
 import networkx as nx
 import matplotlib.pyplot as plt
 
@@ -60,6 +62,66 @@ class Graph1:
 
         plt.show()
 
+    def dfsUtil(self, v, visited):
+        """
+        https://www.geeksforgeeks.org/python-program-for-depth-first-search-or-dfs-for-a-graph/
+        """
+        visited.add(v)
+        print(v, end=' ')
+        for i in self.G[v]:
+            if i not in visited:
+                self.dfsUtil(i,visited)
+
+    def dfs(self, v):
+        visited = set()
+        self.dfsUtil(v, visited)
+
+    def dfsTest(self):
+        while True:
+            print('DFS Test')
+            start_node = input('Enter starting node: ').upper()
+            if start_node not in self.G.nodes:
+                print('Invalid input')
+                continue
+            self.dfs(start_node)
+            print('')
+            selection = input('Run DFS again? (y/n): ').lower()
+            if selection == 'y':
+                continue
+            else:
+                break
+
+    def bfs(self, start):
+        """
+        https://www.geeksforgeeks.org/python-program-for-breadth-first-search-or-bfs-for-a-graph/?ref=header_outind
+        """
+        visited = {node: False for node in self.G}
+        queue = collections.deque([start])
+        visited[start] = True
+
+        while queue:
+            vertex = queue.popleft()
+            print(vertex, end=' ')
+
+            for i in self.G[vertex]:
+                if not visited[i]:
+                    queue.append(i)
+                    visited[i] = True
+
+    def bfsTest(self):
+        while True:
+            print('BFS Test')
+            start_node = input('Enter starting node: ').upper()
+            if start_node not in self.G.nodes:
+                print('Invalid input')
+                continue
+            self.bfs(start_node)
+            selection = input('Run BFS again? (y/n): ').lower()
+            if selection == 'y':
+                continue
+            else:
+                break
+
 class Graph2:
     """
     A connected digraph can be decomposed to its strongly connected components as a
@@ -91,7 +153,8 @@ class Graph3:
     pass # Delete and replace with implementation
 
 def main():
-    menu = {1 : 'Graph 1',
+    menu = {
+            1 : 'Graph 1',
             2 : 'Graph 2',
             3 : 'Graph 3',
             4 : 'Exit program'}
@@ -104,15 +167,17 @@ def main():
     print('Welcome to our Graph Project!')
     print(f'Which graph would you like to see?')
 
-    # Print menu options
-    for key, value in menu.items():
-        print(f'{key}: {value}')
-
     # Prompt user for selection
     while True:
-        selection = input('Enter your option (1-3): ')
+        # Print menu options
+        for key, value in menu.items():
+            print(f'{key}: {value}')
+
+        selection = input('Enter your option (1-4): ')
         if selection == '1':
             graph1.displayGraph()
+            graph1.dfsTest()
+            graph1.bfsTest()
             continue
         elif selection == '2':
             # graph2.displayGraph()
