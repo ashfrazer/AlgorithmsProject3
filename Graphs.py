@@ -238,7 +238,57 @@ class Graph3:
     algorithm to find a shortest path tree?
 
     """
-    pass  # Delete and replace with implementation
+    def __init__(self): # Constructor
+        # Initialize graph
+        self.G = nx.Graph()
+
+        # Create nodes
+        nodes = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+        self.G.add_nodes_from(nodes)
+
+        # Add edges
+        
+        edges = [
+            ('A', 'B', weight := 22.0), ('A', 'C', weight := 9.0), ('A', 'D', weight := 12.0),
+            ('B', 'C', weight := 35.0), ('B', 'F', weight := 36.0), ('B', 'H', weight := 34.0),
+            ('C', 'D', weight := 4.0), ('C', 'E', weight := 65.0), ('C', 'F', weight := 42.0),
+            ('D', 'E', weight := 33.0), ('D', 'I', weight := 30.0),
+            ('E', 'F', weight := 18.0), ('E', 'G', weight := 23.0),
+            ('F', 'G', weight := 39.0), ('F', 'H', weight := 24.0),
+            ('G', 'H', weight := 25.0), ('G', 'I', weight := 21.0),
+            ('H', 'I', weight := 19.0)
+        ]
+
+        self.G.add_weighted_edges_from(edges)
+
+    def displayGraph(self):
+        plt.figure(figsize=(10, 8))
+        pos = nx.spring_layout(self.G)
+        # Draw graph
+        nx.draw(
+        self.G, pos, with_labels=True, node_color='lightblue', edge_color='red',
+        node_size=1000, font_size=10, font_weight='bold', width=1.5)
+        plt.show()
+
+    def Dijkstra(self):
+        start = input("What is the starting node for our Dijkstra's Alg: ")
+        for pathways in self.G:
+           if pathways == start:
+               continue   
+           print(f"The fastest path to {pathways} is")
+           print(nx.dijkstra_path(self.G, start, pathways))
+        print("")
+
+    def MST(self):
+        mst_G = nx.minimum_spanning_tree(self.G)
+        
+        plt.figure(figsize=(10, 8))
+        pos = nx.spring_layout(mst_G)
+        # Draw graph
+        nx.draw(
+        mst_G, pos, with_labels=True, node_color='lightblue', edge_color='red',
+        node_size=1000, font_size=10, font_weight='bold', width=1.5)
+        plt.show()
 
 
 def main():
@@ -273,7 +323,9 @@ def main():
             graph2.sccTest()
             continue
         elif selection == '3':
-            # graph3.displayGraph()
+            graph3.displayGraph()
+            graph3.Dijkstra()
+            graph3.MST()
             continue
         elif selection == '4':
             print('Goodbye!')
