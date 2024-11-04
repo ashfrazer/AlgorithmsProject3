@@ -1,8 +1,13 @@
+"""
+Ash Frazer, Axel Pinard, and Jonathan Wynn
+
+CSCI 3330 Project 3: Graph Algorithms
+"""
+
 import collections
 
 import networkx as nx
 import matplotlib.pyplot as plt
-
 
 class Graph1:
     """
@@ -116,15 +121,6 @@ class Graph2:
     project report (Note: you don’t have to draw it with a program. Draw it manually
     in your report is acceptable); and then
     c) Represent the ‘meta graph’ as a DAG and linearize it in its topological order.
-
-    nodes2 = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
-
-    edges2 = [
-        ('1', '3'), ('2', '1'), ('3', '2'), ('3', '5'), ('4', '1'),
-        ('4', '2'), ('4', '12'), ('5', '6'), ('5', '8'), ('6', '7'),
-        ('6', '8'), ('6', '10'), ('7', '10'), ('8', '9'), ('8', '10'),
-        ('9', '5'), ('9', '11'), ('10', '9'), ('10', '11'), ('11', '12')
-    ]
 
     """
 
